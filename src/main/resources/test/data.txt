@@ -1,0 +1,34 @@
+Rarity: Unique
+Touch of Anguish
+Imperial Claw
+--------
+Claw
+Quality: +20% (augmented)
+Physical Damage: 86-247 (augmented)
+Critical Strike Chance: 8.28% (augmented)
+Attacks per Second: 1.60
+Weapon Range: 11
+--------
+Requirements:
+Level: 68
+Str: 39
+Dex: 131
+Int: 95
+--------
+Sockets: R-B-B 
+--------
+Item Level: 78
+--------
++46 Life gained for each Enemy hit by Attacks
+--------
+Adds 47 to 141 Physical Damage
+30% increased Cold Damage
+38% increased Critical Strike Chance
+20% chance to gain a Frenzy Charge on Killing a Frozen Enemy
+Skills Chain an additional time while at maximum Frenzy Charges
+10% chance to Freeze
+Critical Strikes do not always Freeze
+--------
+Grip the frozen steel, feel it numb you.
+Wield the cold touch of death like 
+a splinter of your own shattered heart.

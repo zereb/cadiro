@@ -1,0 +1,32 @@
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+
+group 'org.zereb'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+
+}
+
+dependencies {
+    implementation 'com.1stleg:jnativehook:2.1.0'
+
+}
+
+
+javafx {
+    version = '12.0.1'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName = 'org.zereb.Cadiro'
+
+
