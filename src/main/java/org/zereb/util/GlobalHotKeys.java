@@ -2,8 +2,10 @@ package org.zereb.util;
 
 import javafx.application.Platform;
 import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeMonitorInfo;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
+import org.jnativehook.mouse.NativeMouseAdapter;
 import org.zereb.FXMLController;
 import org.zereb.data.Item;
 
@@ -30,8 +32,8 @@ public class GlobalHotKeys implements NativeKeyListener {
                     controller.labelDpsInfo.setText(item.toString());
                     controller.stage.show();
                 });
-            } catch (Exception ignored) {
-                ignored.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
