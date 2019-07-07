@@ -1,13 +1,11 @@
-package org.zereb.util;
+package free.zereb.util;
 
 import javafx.application.Platform;
 import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeMonitorInfo;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import org.jnativehook.mouse.NativeMouseAdapter;
-import org.zereb.FXMLController;
-import org.zereb.data.Item;
+import free.zereb.FXMLController;
+import free.zereb.data.Item;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;

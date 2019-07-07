@@ -1,5 +1,7 @@
-package org.zereb;
+package free.zereb;
 
+import free.zereb.utils.Argument;
+import free.zereb.utils.ArgumentHandler;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -8,12 +10,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import org.zereb.util.GlobalHotKeys;
+import free.zereb.util.GlobalHotKeys;
 
 
 
 public class Cadiro extends Application {
 
+    public static String league = null;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,6 +45,10 @@ public class Cadiro extends Application {
     }
 
     public static void main(String[] args) {
+        new ArgumentHandler()
+                .setArgument("-l", a -> league = a[1])
+                .setArgument("-h", a -> System.out.println("-l <League name>"))
+                .runArgs(args);
         launch(args);
     }
 }

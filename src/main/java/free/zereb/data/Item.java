@@ -1,4 +1,4 @@
-package org.zereb.data;
+package free.zereb.data;
 
 public class Item {
 
