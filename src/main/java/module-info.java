@@ -5,7 +5,8 @@ module cadiro {
     requires java.desktop;
     requires java.base;
     requires java.logging;
+    requires java.net.http;
 
-    opens org.zereb to javafx.fxml;
-    exports org.zereb;
+    opens free.zereb to javafx.fxml;
+    exports free.zereb;
 }

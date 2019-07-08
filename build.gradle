@@ -8,7 +8,9 @@ plugins {
 
 group 'org.zereb'
 version ''
-mainClassName = "$moduleName/org.zereb.Cadiro"
+mainClassName = "$moduleName/free.zereb.Cadiro"
+
+
 
 sourceCompatibility = 12
 

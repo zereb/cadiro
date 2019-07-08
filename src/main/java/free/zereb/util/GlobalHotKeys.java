@@ -9,6 +9,8 @@ import free.zereb.data.Item;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Level;
@@ -26,6 +28,8 @@ public class GlobalHotKeys implements NativeKeyListener {
                 String clip = Toolkit.getDefaultToolkit()
                         .getSystemClipboard().getData(DataFlavor.stringFlavor).toString();
                 Item item = new Item(clip);
+//                Item item = new Item(new String(Files.readAllBytes(Paths.get(getClass().getResource("/test/rare_claw").toURI()))));
+                Poeprices poeprices = new Poeprices(item, controller);
                 Platform.runLater(() -> {
                     controller.labelDpsInfo.setText(item.toString());
                     controller.stage.show();
@@ -34,9 +38,7 @@ public class GlobalHotKeys implements NativeKeyListener {
                 e.printStackTrace();
             }
         });
-
     }
-
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent e) {
@@ -53,13 +55,11 @@ public class GlobalHotKeys implements NativeKeyListener {
             if (k.equals(input.toString()))
                 v.run();
         });
-
     }
 
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent e) {
         mapper.remove(e.getKeyCode());
-
     }
 }

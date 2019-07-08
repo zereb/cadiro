@@ -10,11 +10,13 @@ public class Item {
     private double Total = 0;
     private double Q20Phys = 0;
     private double Q30Phys = 0;
-    public String rarity;
     public String name;
+    public String rarity;
 
+    public final String data;
 
     public Item(String data){
+        this.data = data;
         Damage physical = null;
         Damage chaos = null;
         Damage cold = null;

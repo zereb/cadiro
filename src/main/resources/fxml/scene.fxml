@@ -7,5 +7,6 @@
       fx:controller="free.zereb.FXMLController"
       onMouseExited="#close">
     <Label fx:id="labelDpsInfo"/>
+    <Label fx:id="labelPoeprices"/>
 </VBox>
 

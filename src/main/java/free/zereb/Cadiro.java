@@ -16,7 +16,7 @@ import free.zereb.util.GlobalHotKeys;
 
 public class Cadiro extends Application {
 
-    public static String league = null;
+    public static String league = "Legion";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
