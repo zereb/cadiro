@@ -2,9 +2,9 @@ package free.zereb.data;
 
 public class Damage {
 
-    public final int low;
-    public final int high;
-    public final double avg;
+    private final int low;
+    private final int high;
+    final double avg;
 
     public Damage(String data){
 

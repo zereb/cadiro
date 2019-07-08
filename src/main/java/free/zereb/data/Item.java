@@ -5,13 +5,13 @@ public class Item {
     private double physDps = 0;
     private double chaosDps = 0;
     private double eleDps = 0;
-    private double Q30Total = 0;
-    private double Q20Total = 0;
-    private double Total = 0;
-    private double Q20Phys = 0;
-    private double Q30Phys = 0;
-    public String name;
-    public String rarity;
+    private double Q30Total;
+    private double Q20Total;
+    private double Total;
+    private double Q20Phys;
+    private double Q30Phys;
+    private String name;
+    private String rarity;
 
     public final String data;
 

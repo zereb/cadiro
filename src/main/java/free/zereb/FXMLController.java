@@ -16,7 +16,7 @@ public class FXMLController implements Initializable {
     public Stage stage;
     public Label labelPoeprices;
 
-    public FXMLController(Stage primaryStage) {
+    FXMLController(Stage primaryStage) {
         this.stage = primaryStage;
     }
 

@@ -5,8 +5,6 @@ import free.zereb.FXMLController;
 import free.zereb.data.Item;
 import javafx.application.Platform;
 
-import java.awt.image.renderable.RenderedImageFactory;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -19,15 +17,15 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
-public class Poeprices {
+class Poeprices {
 
 
-    public double min = 0;
-    public double max = 0;
-    public String curency;
-    public String warning;
+    private double min = 0;
+    private double max = 0;
+    private String curency;
+    private String warning;
 
-    public Poeprices(Item item, FXMLController controller) {
+    Poeprices(Item item, FXMLController controller) {
         String league = URLEncoder.encode(Cadiro.league, StandardCharsets.UTF_8);
         String data = Base64.getEncoder().encodeToString(item.data.getBytes());
         String urlStr = "https://www.poeprices.info/api?l="+league+"&i="+data;
