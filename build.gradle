@@ -6,7 +6,7 @@ plugins {
     id 'org.beryx.jlink' version '2.9.4'
 }
 
-group 'org.zereb'
+group 'free.zereb'
 version ''
 mainClassName = "$moduleName/free.zereb.Cadiro"
 
@@ -31,7 +31,7 @@ javafx {
 
 jar{
     manifest {
-        attributes 'Main-Class': 'org.zereb.Cadiro'
+        attributes 'Main-Class': 'free.zereb.Cadiro'
     }
     from {
         configurations.runtimeClasspath.findAll{

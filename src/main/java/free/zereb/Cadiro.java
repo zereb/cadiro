@@ -45,6 +45,7 @@ public class Cadiro extends Application {
     }
 
     public static void main(String[] args) {
+        System.out.println("hi");
         new ArgumentHandler()
                 .setArgument("-l", a -> league = a[1])
                 .setArgument("-h", a -> System.out.println("-l <League name>"))
