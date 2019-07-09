@@ -28,7 +28,7 @@ class Poeprices {
     Poeprices(Item item, FXMLController controller) {
         String league = URLEncoder.encode(Cadiro.league, StandardCharsets.UTF_8);
         String data = Base64.getEncoder().encodeToString(item.data.getBytes());
-        String urlStr = "https://www.poeprices.info/api?l="+league+"&i="+data;
+        String urlStr = "https://www.poeprices.info/api?l=" + league + "&i=" + data;
 
         HttpClient httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(15))
@@ -44,8 +44,8 @@ class Poeprices {
                 .thenAccept(response -> {
                     System.out.println(response.body());
                     String json = response.body()
-                            .replaceAll("\\{","")
-                            .replaceAll("}","")
+                            .replaceAll("\\{", "")
+                            .replaceAll("}", "")
                             .replaceAll("\"", "");
                     List<String> tokens = Arrays.asList(json.split(","));
                     HashMap<String, String> values = new HashMap<>();
@@ -57,22 +57,20 @@ class Poeprices {
                     });
 
 
-                    if (values.get("min") != null && values.get("max") != null){
+                    if (values.get("min") != null && values.get("max") != null) {
                         min = Double.parseDouble(values.get("min"));
                         max = Double.parseDouble(values.get("max"));
                     }
                     curency = values.get("currency");
                     warning = values.get("warning_msg");
+                    String error = values.get("error_msg");
 
 
-                    String guiResult = String.format("%.2f - %.2f %s \n %s", min, max, curency, warning);
-                    System.out.println(guiResult);
+                    String guiResult = String.format("%.2f - %.2f %s\n%s \n%s", min, max, curency, warning, error);
 
-                    Platform.runLater(()-> controller.labelPoeprices.setText(guiResult));
+                    Platform.runLater(() -> controller.labelPoeprices.setText(guiResult));
 
                 });
-
-
     }
 
 

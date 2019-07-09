@@ -1,5 +1,6 @@
 package free.zereb;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -16,6 +17,9 @@ public class FXMLController implements Initializable {
     public Stage stage;
     public Label labelPoeprices;
 
+    public double mouseX;
+    public double mouseY;
+
     FXMLController(Stage primaryStage) {
         this.stage = primaryStage;
     }
@@ -27,6 +31,8 @@ public class FXMLController implements Initializable {
 
     @FXML
     public void close(MouseEvent mouseEvent) {
+        labelPoeprices.setText("");
+        labelDpsInfo.setText("");
         stage.close();
     }
 }

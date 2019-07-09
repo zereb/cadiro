@@ -32,16 +32,15 @@ public class Cadiro extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/fxml/scene.fxml"));
         loader.setControllerFactory(t -> controller);
-        GlobalScreen.addNativeKeyListener(new GlobalHotKeys(controller));
 
         primaryStage.setMinWidth(400);
-        primaryStage.setMinHeight(80);
+        primaryStage.setMinHeight(100);
         primaryStage.setResizable(false);
         primaryStage.setAlwaysOnTop(true);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(loader.load()));
 
-
+        GlobalScreen.addNativeKeyListener(new GlobalHotKeys(controller));
     }
 
     public static void main(String[] args) {
