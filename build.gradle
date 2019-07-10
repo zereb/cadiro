@@ -2,13 +2,11 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
-    id 'org.beryx.jlink' version '2.9.4'
 }
 
 group 'free.zereb'
 version ''
-mainClassName = "$moduleName/free.zereb.Cadiro"
+mainClassName = "free.zereb.Cadiro"
 
 
 
@@ -19,33 +17,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.1stleg:jnativehook:2.1.0'
+    compile 'com.1stleg:jnativehook:2.1.0'
 }
 
-
-
-javafx {
-    version = '12.0.1'
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
-jar{
+task fatJar(type: Jar){
     manifest {
         attributes 'Main-Class': 'free.zereb.Cadiro'
     }
     from {
-        configurations.runtimeClasspath.findAll{
-            it.getName().contains("jnativehook")
-        }.collect{
+        configurations.compile.collect{
             it.isDirectory() ? it : zipTree(it)
         }
-    }
+    } with jar
 }
 
-jlink {
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-    launcher {
-        name = 'Cadiro'
-    }
-}
+
 

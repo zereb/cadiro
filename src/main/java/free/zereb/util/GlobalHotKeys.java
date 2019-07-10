@@ -1,39 +1,35 @@
 package free.zereb.util;
 
-import javafx.application.Platform;
-import javafx.geometry.Point2D;
-import org.jnativehook.GlobalScreen;
+import free.zereb.Cadiro;
+import free.zereb.data.Item;
+import free.zereb.utils.Util;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-import free.zereb.FXMLController;
-import free.zereb.data.Item;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GlobalHotKeys implements NativeKeyListener{
     private HashSet<Integer> mapper = new HashSet<>();
     private HashMap<String, Runnable> keyKombinations = new HashMap<>();
-    private Point2D mousePosition;
 
-    public GlobalHotKeys(FXMLController controller){
-        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-        logger.setLevel(Level.OFF);
+    public GlobalHotKeys(Cadiro cadiro){
+
+
         keyKombinations.putIfAbsent("CtrlC", () -> {
                 Item item = new Item(getClipboard());
-                new Poeprices(item, controller);
-                Platform.runLater(() -> {
+                new Poeprices(item, cadiro);
+                SwingUtilities.invokeLater(() -> {
                     Point p = MouseInfo.getPointerInfo().getLocation();
-                    controller.labelDpsInfo.setText(item.toString());
-                    controller.stage.setX(p.x);
-                    controller.stage.setY(p.y);
-                    controller.stage.show();
+                    cadiro.labelDpsInfo.setText(Util.swingLabelNewlines(item.toString()));
+                    cadiro.frame.setLocation(p);
+                    cadiro.frame.pack();
+                    cadiro.frame.setVisible(true);
                 });
         });
     }

@@ -1,10 +1,10 @@
 package free.zereb.util;
 
 import free.zereb.Cadiro;
-import free.zereb.FXMLController;
 import free.zereb.data.Item;
-import javafx.application.Platform;
+import free.zereb.utils.Util;
 
+import javax.swing.*;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -25,7 +25,7 @@ class Poeprices {
     private String curency;
     private String warning;
 
-    Poeprices(Item item, FXMLController controller) {
+    Poeprices(Item item, Cadiro cadiro) {
         String league = URLEncoder.encode(Cadiro.league, StandardCharsets.UTF_8);
         String data = Base64.getEncoder().encodeToString(item.data.getBytes());
         String urlStr = "https://www.poeprices.info/api?l=" + league + "&i=" + data;
@@ -47,6 +47,7 @@ class Poeprices {
                             .replaceAll("\\{", "")
                             .replaceAll("}", "")
                             .replaceAll("\"", "");
+
                     List<String> tokens = Arrays.asList(json.split(","));
                     HashMap<String, String> values = new HashMap<>();
                     tokens.forEach(token -> {
@@ -68,7 +69,10 @@ class Poeprices {
 
                     String guiResult = String.format("%.2f - %.2f %s\n%s \n%s", min, max, curency, warning, error);
 
-                    Platform.runLater(() -> controller.labelPoeprices.setText(guiResult));
+                    SwingUtilities.invokeLater(() -> {
+                        cadiro.frame.pack();
+                        cadiro.labelPricecheck.setText(Util.swingLabelNewlines(guiResult));
+                    });
 
                 });
     }

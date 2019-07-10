@@ -1,54 +1,60 @@
 package free.zereb;
 
-import free.zereb.utils.Argument;
+import free.zereb.util.GlobalHotKeys;
 import free.zereb.utils.ArgumentHandler;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import free.zereb.util.GlobalHotKeys;
+
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
-
-public class Cadiro extends Application {
+public class Cadiro{
 
     public static String league = "Legion";
+    public JFrame frame = new JFrame("Cadiro");
+    public JLabel labelDpsInfo = new JLabel();
+    public JLabel labelPricecheck = new JLabel();
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+    public Cadiro(){
         try {
+            Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+            logger.setLevel(Level.OFF);
+            logger.setUseParentHandlers(false);
             GlobalScreen.registerNativeHook();
         }catch (NativeHookException e){
             System.out.println(e.getMessage());
         }
 
-        Platform.setImplicitExit(false);
+        frame.setUndecorated(true);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
-        FXMLController controller = new FXMLController(primaryStage);
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/scene.fxml"));
-        loader.setControllerFactory(t -> controller);
 
-        primaryStage.setMinWidth(400);
-        primaryStage.setMinHeight(100);
-        primaryStage.setResizable(false);
-        primaryStage.setAlwaysOnTop(true);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setScene(new Scene(loader.load()));
+        frame.getContentPane().add(labelDpsInfo);
+        frame.getContentPane().add(labelPricecheck);
+        frame.setAlwaysOnTop(true);
 
-        GlobalScreen.addNativeKeyListener(new GlobalHotKeys(controller));
+        frame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseExited(MouseEvent e) {
+                frame.setVisible(false);
+            }
+        });
+
+        GlobalScreen.addNativeKeyListener(new GlobalHotKeys(this));
     }
 
+
+
     public static void main(String[] args) {
-        System.out.println("hi");
         new ArgumentHandler()
-                .setArgument("-l", a -> league = a[1])
+                .setArgument("-l", a -> league = a[1].replaceAll("//", " "))
                 .setArgument("-h", a -> System.out.println("-l <League name>"))
                 .runArgs(args);
-        launch(args);
+        System.out.println("league: " + league);
+        SwingUtilities.invokeLater(Cadiro::new);
     }
 }
