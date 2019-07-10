@@ -7,8 +7,6 @@ public class Damage {
     final double avg;
 
     public Damage(String data){
-
-
         int separator = data.indexOf("-");
         low = Integer.parseInt(data.substring(0, separator).replaceAll("\\D", ""));
         high = Integer.parseInt(data.substring(separator).replaceAll("\\D", ""));

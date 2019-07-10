@@ -19,8 +19,6 @@ public class GlobalHotKeys implements NativeKeyListener{
     private HashMap<String, Runnable> keyKombinations = new HashMap<>();
 
     public GlobalHotKeys(Cadiro cadiro){
-
-
         keyKombinations.putIfAbsent("CtrlC", () -> {
                 Item item = new Item(getClipboard());
                 new Poeprices(item, cadiro);

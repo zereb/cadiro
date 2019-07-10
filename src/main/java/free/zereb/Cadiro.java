@@ -19,7 +19,7 @@ public class Cadiro{
     public JLabel labelDpsInfo = new JLabel();
     public JLabel labelPricecheck = new JLabel();
 
-    public Cadiro(){
+    private Cadiro(){
         try {
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
             logger.setLevel(Level.OFF);

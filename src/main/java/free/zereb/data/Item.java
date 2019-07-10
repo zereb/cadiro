@@ -65,13 +65,11 @@ public class Item {
         if (lighting != null)
             eleDps = eleDps + lighting.avg * attackSpeed;
 
-
         Q20Phys = physDps * (physIncreased + 120) / (physIncreased + quality + 100);
         Q30Phys = physDps * (physIncreased + 130) / (physIncreased + quality + 100);
         Total = physDps + chaosDps + eleDps;
         Q20Total = Q20Phys + chaosDps + eleDps;
         Q30Total = Q30Phys + chaosDps + eleDps;
-
     }
 
     public String toString(){
