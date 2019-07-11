@@ -36,7 +36,7 @@ public class GlobalHotKeys implements NativeKeyListener{
     private String getClipboard() {
         String clip = null;
         try {
-            if ((Toolkit.getDefaultToolkit().getSystemClipboard().isDataFlavorAvailable(DataFlavor.stringFlavor)){
+            if (Toolkit.getDefaultToolkit().getSystemClipboard().isDataFlavorAvailable(DataFlavor.stringFlavor)){
                 clip = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
             }
         }catch (UnsupportedFlavorException | IOException e) {
