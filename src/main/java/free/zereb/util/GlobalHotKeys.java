@@ -21,6 +21,11 @@ public class GlobalHotKeys implements NativeKeyListener{
     public GlobalHotKeys(Cadiro cadiro){
         keyKombinations.putIfAbsent("CtrlC", () -> {
                 SwingUtilities.invokeLater(() -> {
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     Item item = new Item(getClipboard());
                     new Poeprices(item, cadiro);
                     Point p = MouseInfo.getPointerInfo().getLocation();
@@ -39,8 +44,7 @@ public class GlobalHotKeys implements NativeKeyListener{
             if (Toolkit.getDefaultToolkit().getSystemClipboard().isDataFlavorAvailable(DataFlavor.stringFlavor)){
                 clip = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
             }
-        }catch (UnsupportedFlavorException | IOException e) {
-            e.printStackTrace();
+        }catch (UnsupportedFlavorException | IOException ignored) {
         }
         return clip;
     }

@@ -40,6 +40,8 @@ public class Cadiro{
         frame.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
+                labelDpsInfo.setText("");
+                labelPricecheck.setText("");
                 frame.setVisible(false);
             }
         });

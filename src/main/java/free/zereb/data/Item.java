@@ -13,6 +13,7 @@ public class Item {
     private String name;
     private String rarity;
 
+
     public final String data;
 
     public Item(String data){

@@ -70,8 +70,8 @@ class Poeprices {
                     String guiResult = String.format("%.2f - %.2f %s\n%s \n%s", min, max, curency, warning, error);
 
                     SwingUtilities.invokeLater(() -> {
-                        cadiro.frame.pack();
                         cadiro.labelPricecheck.setText(Util.swingLabelNewlines(guiResult));
+                        cadiro.frame.pack();
                     });
 
                 });
