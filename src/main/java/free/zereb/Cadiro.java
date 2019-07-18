@@ -6,6 +6,9 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
@@ -20,6 +23,31 @@ public class Cadiro{
     public JLabel labelPricecheck = new JLabel();
 
     private Cadiro(){
+        SystemTray systemTray;
+       if (SystemTray.isSupported()){
+           systemTray = SystemTray.getSystemTray();
+           Image image = Toolkit.getDefaultToolkit().getImage("/icon.png");
+           PopupMenu trayPopupMenu = new PopupMenu();
+           MenuItem action = new MenuItem("League name");
+           action.addActionListener(e -> JOptionPane.showMessageDialog(null, league));
+           trayPopupMenu.add(action);
+
+           MenuItem close = new MenuItem("Exit");
+           close.addActionListener(e -> System.exit(0));
+           trayPopupMenu.add(close);
+
+           TrayIcon trayIcon = new TrayIcon(image, "Cadiro", trayPopupMenu);
+           trayIcon.setImageAutoSize(true);
+
+           try {
+               systemTray.add(trayIcon);
+           }catch (AWTException e){
+               e.printStackTrace();
+           }
+
+
+       }
+
         try {
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
             logger.setLevel(Level.OFF);
