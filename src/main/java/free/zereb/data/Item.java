@@ -74,8 +74,10 @@ public class Item {
     }
 
     public String toString(){
-        return String.format("Physical dps: %.2f Q20: %.2f Q30: %.2f \n" +
+        if (Total > 0)
+            return String.format("Physical dps: %.2f Q20: %.2f Q30: %.2f \n" +
                 "Chaos dps: %.2f Elemental dps: %.2f \n" +
                 "Total dps: %.2f Q20: %.2f Q30: %.2f", physDps, Q20Phys, Q30Phys, chaosDps, eleDps, Total, Q20Total, Q30Total);
+        else return "";
     }
 }

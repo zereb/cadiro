@@ -64,10 +64,11 @@ class Poeprices {
                     }
                     curency = values.get("currency");
                     warning = values.get("warning_msg");
+                    String confidence = values.get("pred_confidence_score");
                     String error = values.get("error_msg");
 
 
-                    String guiResult = String.format("%.2f - %.2f %s\n%s \n%s", min, max, curency, warning, error);
+                    String guiResult = String.format("%.2f - %.2f %s \nConfidence: %s \n%s \n%s ", min, max, curency, confidence,warning, error);
 
                     SwingUtilities.invokeLater(() -> {
                         cadiro.labelPricecheck.setText(Util.swingLabelNewlines(guiResult));
