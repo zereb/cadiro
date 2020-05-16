@@ -10,7 +10,7 @@ mainClassName = "free.zereb.Cadiro"
 
 
 
-sourceCompatibility = 12
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()

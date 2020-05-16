@@ -32,6 +32,7 @@ public class GlobalHotKeys implements NativeKeyListener{
                     cadiro.labelDpsInfo.setText(Util.swingLabelNewlines(item.toString()));
                     cadiro.frame.setLocation(p);
                     cadiro.frame.pack();
+                    cadiro.frame.setResizable(false);
                     cadiro.frame.setVisible(true);
                 });
         });
