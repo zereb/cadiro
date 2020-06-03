@@ -9,6 +9,6 @@ java -jar cadiro.jar -l Hardcore//Legion
 
 #Screenshots
 
-   ![1](screemshots/1.png)
-   ![2](screemshots/5.png)
-   ![3](screemshots/4.png)
+   ![1](https://raw.githubusercontent.com/zereb/cadiro/master/screenshots/1.png)
+   ![4](https://raw.githubusercontent.com/zereb/cadiro/master/screenshots/4.png)
+   ![5](https://raw.githubusercontent.com/zereb/cadiro/master/screenshots/5.png)
