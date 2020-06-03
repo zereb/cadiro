@@ -10,8 +10,8 @@ public class Item {
     private double Total;
     private double Q20Phys;
     private double Q30Phys;
-    private String name;
-    private String rarity;
+    public String name;
+    public String rarity;
 
 
     public final String data;
@@ -31,12 +31,17 @@ public class Item {
         System.out.println(data);
 
         int i = 0;
+        if (data == null) return;
+
         for (String line: data.split("\\R")){
             i++;
             if (i == 2)
+                name  = line;
+            if (i == 3 && name == null)
                 name = line;
-            if (line.contains("Rarity"))
-                rarity = line.substring(line.indexOf(":")).trim();
+            if (line.contains("Rarity:"))
+            {
+                rarity = line.substring(line.indexOf(":") + 1).trim();}
             if (line.contains("Quality"))
                 quality = Integer.parseInt(line.replaceAll("\\D", ""));
             if (line.contains("Physical Damage:"))

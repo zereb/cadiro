@@ -1,5 +1,6 @@
 package free.zereb;
 
+import com.google.gson.Gson;
 import free.zereb.util.GlobalHotKeys;
 import free.zereb.utils.ArgumentHandler;
 import org.jnativehook.GlobalScreen;
@@ -19,6 +20,7 @@ public class Cadiro{
     public JFrame frame = new JFrame("Cadiro");
     public JLabel labelDpsInfo = new JLabel();
     public JLabel labelPricecheck = new JLabel();
+    public Gson gson = new Gson();
 
     private Cadiro(){
         SystemTray systemTray;
@@ -74,7 +76,13 @@ public class Cadiro{
             }
         });
 
-        GlobalScreen.addNativeKeyListener(new GlobalHotKeys(this));
+        try {
+            GlobalHotKeys globalHotKeys = new GlobalHotKeys(this);
+            GlobalScreen.addNativeKeyListener(globalHotKeys);
+            GlobalScreen.addNativeMouseWheelListener(globalHotKeys);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     compile 'com.1stleg:jnativehook:2.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 task fatJar(type: Jar){
@@ -29,6 +30,11 @@ task fatJar(type: Jar){
             it.isDirectory() ? it : zipTree(it)
         }
     } with jar
+}
+
+task copyJarToBin(type: Copy) {
+    from jar // shortcut for createJar.outputs.files
+    into "/home/oleg/"
 }
 
 
