@@ -2,6 +2,7 @@ package free.zereb.util;
 
 import free.zereb.Cadiro;
 import free.zereb.data.Item;
+import free.zereb.utils.ItemParser;
 import free.zereb.utils.Util;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -26,14 +27,15 @@ public class GlobalHotKeys implements NativeKeyListener, NativeMouseWheelListene
         robot = new Robot();
         keyCombinations.putIfAbsent("CtrlC", () -> SwingUtilities.invokeLater(() -> {
             cadiro.frame.setResizable(false);
-            Item item = new Item(getClipboard());
+            Item item = ItemParser.parse(getClipboard());
+
             if (item.rarity.equals("Rare"))
                 new Poeprices(item, cadiro);
             else {
                 new PoeTrade(item, cadiro);
             }
             Point p = MouseInfo.getPointerInfo().getLocation();
-            cadiro.labelDpsInfo.setText(Util.swingLabelNewlines(item.toString()));
+            cadiro.labelDpsInfo.setText(Util.swingLabelNewlines(item.getDamage()));
             cadiro.labelPricecheck.setText("Pending...");
             p.x -= cadiro.frame.getWidth();
             cadiro.frame.setLocation(p);

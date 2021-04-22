@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class Cadiro{
 
-    public static String league = "Legion";
+    public static String league = "";
     public JFrame frame = new JFrame("Cadiro");
     public JLabel labelDpsInfo = new JLabel();
     public JLabel labelPricecheck = new JLabel();
@@ -45,7 +45,6 @@ public class Cadiro{
            }catch (AWTException e){
                e.printStackTrace();
            }
-
 
        }
 
@@ -90,7 +89,7 @@ public class Cadiro{
     public static void main(String[] args) {
         new ArgumentHandler()
                 .setArgument("-l", a -> league = a[1].replaceAll("//", " "))
-                .setArgument("-h", a -> System.out.println("-l <League name>"))
+                .setArgument("-h", a -> System.out.println("-l <League name> use // for <space>"))
                 .runArgs(args);
         System.out.println("league: " + league);
         SwingUtilities.invokeLater(Cadiro::new);

@@ -7,39 +7,44 @@ import free.zereb.utils.Util;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URLEncoder;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Base64;
-import java.util.Iterator;
 import java.util.List;
 
 public class PoeTrade {
-    private Cadiro cadiro;
-    private HttpClient httpClient;
-    private Item item;
+    private final Cadiro cadiro;
+    private final HttpClient httpClient;
+    private final Item item;
 
-    public PoeTrade(Item item, Cadiro cadiro) {
+    public PoeTrade(Item item, Cadiro cadiro){
         this.cadiro = cadiro;
         this.item = item;
+        URI uri = null;
+        try {
+            uri = new URI("https", "www.pathofexile.com", "/api/trade/search/" + Cadiro.league, null);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         httpClient = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(15))
                 .build();
 
-
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://www.pathofexile.com/api/trade/search/Hardcore%20Delirium"))
+                .uri(uri)
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("{\"query\":{\"status\":{\"option\":\"online\"},\"term\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[],\"disabled\":true}],\"filters\":{\"trade_filters\":{\"disabled\":false,\"filters\":{\"sale_type\":{\"option\":\"priced\"}}}}},\"sort\":{\"price\":\"asc\"}}"))
+                .POST(HttpRequest.BodyPublishers.ofString("{\"query\":{\"status\":{\"option\":\"online\"},\"name\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[],\"disabled\":true}],\"filters\":{\"trade_filters\":{\"disabled\":false,\"filters\":{\"sale_type\":{\"option\":\"priced\"}}}}},\"sort\":{\"price\":\"asc\"}}"))
                 .build();
+        System.out.println(request);
+        System.out.println(item.name);
 
 
         httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
+                    System.out.println(response.body());
                     StringBuilder guiResult = new StringBuilder();
                     ResponseFirst responseFirst = cadiro.gson.fromJson(response.body(), ResponseFirst.class);
                     guiResult.append("\n Total:").append(responseFirst.total).append("\n");

@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class ArgumentHandler {
 
-    private HashMap<String, Argument> arguments = new HashMap<>();
+    private final HashMap<String, Argument> arguments = new HashMap<>();
 
 
     public ArgumentHandler setArgument(String arg, Argument argument){
