@@ -33,10 +33,17 @@ public class PoeTrade {
                 .connectTimeout(Duration.ofSeconds(15))
                 .build();
 
+        String reqTemplate;
+        if (item.rarity.equals("Unique"))
+            reqTemplate = "{\"query\":{\"status\":{\"option\":\"online\"},\"name\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[],\"disabled\":true}],\"filters\":{\"trade_filters\":{\"disabled\":false,\"filters\":{\"sale_type\":{\"option\":\"priced\"}}}}},\"sort\":{\"price\":\"asc\"}}";
+        else
+            reqTemplate = "{\"query\":{\"status\":{\"option\":\"online\"},\"type\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[]}],\"filters\":{\"trade_filters\":{\"disabled\":true,\"filters\":{\"price\":{\"min\":29}}},\"type_filters\":{\"filters\":{\"rarity\":{\"option\":\"rare\"}},\"disabled\":true}}},\"sort\":{\"price\":\"asc\"}}";
+
+        System.out.println(reqTemplate);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("{\"query\":{\"status\":{\"option\":\"online\"},\"name\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[],\"disabled\":true}],\"filters\":{\"trade_filters\":{\"disabled\":false,\"filters\":{\"sale_type\":{\"option\":\"priced\"}}}}},\"sort\":{\"price\":\"asc\"}}"))
+                .POST(HttpRequest.BodyPublishers.ofString(reqTemplate))
                 .build();
         System.out.println(request);
         System.out.println(item.name);
