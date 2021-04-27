@@ -36,7 +36,7 @@ public class GlobalHotKeys implements NativeKeyListener, NativeMouseWheelListene
             }
             Point p = MouseInfo.getPointerInfo().getLocation();
             cadiro.labelDpsInfo.setText(Util.swingLabelNewlines(item.getDamage()));
-            cadiro.labelPricecheck.setText("Pending...");
+            cadiro.labelPricecheck.setText("price check for " + Cadiro.league + " ...");
             p.x -= cadiro.frame.getWidth();
             cadiro.frame.setLocation(p);
             cadiro.frame.pack();

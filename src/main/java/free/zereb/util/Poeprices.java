@@ -12,18 +12,10 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
 
 class Poeprices {
 
-
-    private double min = 0;
-    private double max = 0;
-    private String curency;
-    private String warning;
 
     Poeprices(Item item, Cadiro cadiro) {
         String league = URLEncoder.encode(Cadiro.league, StandardCharsets.UTF_8);
@@ -43,41 +35,27 @@ class Poeprices {
         httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     System.out.println(response.body());
-                    String json = response.body()
-                            .replaceAll("\\{", "")
-                            .replaceAll("}", "")
-                            .replaceAll("\"", "");
+                    ResponsePoePricesJson json =  cadiro.gson.fromJson(response.body(), ResponsePoePricesJson.class);
 
-                    List<String> tokens = Arrays.asList(json.split(","));
-                    HashMap<String, String> values = new HashMap<>();
-                    tokens.forEach(token -> {
-                        if (token.contains(":")) {
-                            String[] subTokens = token.split(":");
-                            values.putIfAbsent(subTokens[0].trim(), subTokens[1].trim());
-                        }
-                    });
-
-
-                    if (values.get("min") != null && values.get("max") != null) {
-                        min = Double.parseDouble(values.get("min"));
-                        max = Double.parseDouble(values.get("max"));
-                    }
-                    curency = values.get("currency");
-                    warning = values.get("warning_msg");
-                    String confidence = values.get("pred_confidence_score");
-                    String error = values.get("error_msg");
-
-
-                    String guiResult = String.format("%.2f - %.2f %s \nConfidence: %s \n%s \n%s ", min, max, curency, confidence,warning, error);
+                    String guiResult = String.format("%.2f - %.2f %s \nConfidence: %s \n%s \n%s ",
+                            json.min, json.max, json.currency, json.pred_confidence_score, json.warning_msg, json.error_msg);
 
                     SwingUtilities.invokeLater(() -> {
                         cadiro.labelPricecheck.setText(Util.swingLabelNewlines(guiResult));
                         cadiro.frame.pack();
                     });
-
                 });
     }
 
+    class ResponsePoePricesJson {
+        public double min;
+        public double max;
+        public String currency;
+        public String warning_msg;
+        public double error;
+        public String pred_confidence_score;
+        public String error_msg;
+    }
 
 
 }
