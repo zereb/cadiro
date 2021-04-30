@@ -58,6 +58,15 @@ public class PoeTrade {
                     System.out.println(response.body());
                     StringBuilder guiResult = new StringBuilder();
                     ResponseFirst responseFirst = cadiro.gson.fromJson(response.body(), ResponseFirst.class);
+
+                    if (responseFirst.error != null){
+                        guiResult.append(responseFirst.error.message);
+                        SwingUtilities.invokeLater(() -> {
+                            cadiro.labelPricecheck.setText(Util.swingLabelNewlines(guiResult.toString()));
+                            cadiro.frame.pack();
+                        });
+                    }
+
                     guiResult.append("\n Total:").append(responseFirst.total).append("\n");
                     if (responseFirst.total < 9)
                         guiResult.append(secondRequest(responseFirst, 0, responseFirst.total - 1));
@@ -101,11 +110,18 @@ public class PoeTrade {
 
 
     class ResponseFirst {
+        public Error error;
         public String id;
         public String complexity;
         public List<String> result;
         public int total;
+
+        public class Error{
+            public int code;
+            public String message;
+        }
     }
+
 
     public class ResponseSecond {
         public List<Result> result;
@@ -127,11 +143,13 @@ public class PoeTrade {
                 public boolean corrupted;
                 public String name;
                 public int ilvl;
+
             }
 
             public class Listing {
                 public String indexed;
                 public Price price;
+
 
                 public class Price {
                     public float amount;

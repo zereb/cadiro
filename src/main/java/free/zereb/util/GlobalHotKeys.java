@@ -35,6 +35,7 @@ public class GlobalHotKeys implements NativeKeyListener, NativeMouseWheelListene
                 new PoeTrade(item, cadiro);
             }
             Point p = MouseInfo.getPointerInfo().getLocation();
+            cadiro.labelName.setText(item.name + " Quality: " + item.quality);
             cadiro.labelDpsInfo.setText(Util.swingLabelNewlines(item.getDamage()));
             cadiro.labelPricecheck.setText("price check for " + Cadiro.league + " ...");
             p.x -= cadiro.frame.getWidth();

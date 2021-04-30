@@ -19,6 +19,7 @@ public class Cadiro{
     public static String league = "";
     public JFrame frame = new JFrame("Cadiro");
     public JLabel labelDpsInfo = new JLabel();
+    public JLabel labelName = new JLabel();
     public JLabel labelPricecheck = new JLabel();
     public Gson gson = new Gson();
 
@@ -61,6 +62,8 @@ public class Cadiro{
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
 
+
+        frame.getContentPane().add(labelName);
         frame.getContentPane().add(labelDpsInfo);
         frame.getContentPane().add(labelPricecheck);
         frame.setAlwaysOnTop(true);
