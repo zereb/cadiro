@@ -19,6 +19,9 @@ public class ItemParser {
 
         Item.Builder builder = new Item.Builder();
 
+        boolean lvlFlag = false;
+        boolean qualityFlag = false;
+
         for (String line: data.split("\\R")){
             if (rarity != null && name == null) name = line;
 
@@ -34,12 +37,19 @@ public class ItemParser {
             if (line.contains("Item Class:"))
                 itemClass = trim;
 
+
+            if (line.contains("Level:") && !lvlFlag){
+                builder.lvl(Integer.parseInt(line.replaceAll("\\D", "")));
+                lvlFlag = true;
+            }
+
             if (line.contains("Sockets:"))
                 builder.sockets(trim);
 
-            if (line.contains("Quality"))
+            if (line.contains("Quality") && !qualityFlag) {
                 builder.quality(Integer.parseInt(line.replaceAll("\\D", "")));
-
+                qualityFlag = true;
+            }
             if (line.contains("implicit"))
                 builder.implicit(line);
 

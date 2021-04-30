@@ -15,6 +15,7 @@ public class Item {
     public final String itemClass;
     public final String sockets;
     public final int quality;
+    public final int lvl;
 
     //weapon stats
     public final Damage phys;
@@ -39,10 +40,16 @@ public class Item {
         private int quality;
         private int physInc;
         private double aps;
+        private int lvl;
 
         public Item build(String name, String rarity, int ilvl, String itemClass, String data) {
 
-            return new Item(name, rarity, ilvl, data, implicit, mods, flavorText, itemClass, sockets, quality, phys, fire, cold, lighting, chaos, aps, physInc);
+            return new Item(name, rarity, ilvl, data, implicit, mods, flavorText, itemClass, sockets, quality, lvl, phys, fire, cold, lighting, chaos, aps, physInc);
+        }
+
+        public Builder lvl(int lvl){
+            this.lvl = lvl;
+            return this;
         }
 
 
@@ -105,7 +112,7 @@ public class Item {
 
     }
 
-    private Item(String name, String rarity, int ilvl, String data, String implicit, List<String> mods, String flavorText, String itemClass, String sockets, int quality, Damage phys, Damage fire, Damage cold, Damage lighting, Damage chaos, double aps, int physInc) {
+    private Item(String name, String rarity, int ilvl, String data, String implicit, List<String> mods, String flavorText, String itemClass, String sockets, int quality, int lvl, Damage phys, Damage fire, Damage cold, Damage lighting, Damage chaos, double aps, int physInc) {
         this.name = name;
         this.rarity = rarity;
         this.ilvl = ilvl;
@@ -116,6 +123,7 @@ public class Item {
         this.itemClass = itemClass;
         this.sockets = sockets;
         this.quality = quality;
+        this.lvl = lvl;
         this.phys = phys;
         this.fire = fire;
         this.cold = cold;
@@ -134,6 +142,7 @@ public class Item {
                 ", sockets='" + sockets + '\'' +
                 ". quality = " + quality +
                 ", ilvl=" + ilvl +
+                ", lvl=" + lvl +
                 "\n implicit='" + implicit + '\'' +
                 "\n mods=" + mods +
                 "\n flavorText='" + flavorText + '\'' +
