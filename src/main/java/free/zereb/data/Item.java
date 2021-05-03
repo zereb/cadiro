@@ -16,6 +16,7 @@ public class Item {
     public final String sockets;
     public final int quality;
     public final int lvl;
+    public final int links;
 
     //weapon stats
     public final Damage phys;
@@ -41,17 +42,22 @@ public class Item {
         private int physInc;
         private double aps;
         private int lvl;
+        private int links;
 
         public Item build(String name, String rarity, int ilvl, String itemClass, String data) {
 
-            return new Item(name, rarity, ilvl, data, implicit, mods, flavorText, itemClass, sockets, quality, lvl, phys, fire, cold, lighting, chaos, aps, physInc);
+            return new Item(name, rarity, ilvl, data, implicit, mods, flavorText, itemClass, sockets, quality, lvl, links, phys, fire, cold, lighting, chaos, aps, physInc);
+        }
+
+        public Builder links(int links){
+            this.links = links;
+            return this;
         }
 
         public Builder lvl(int lvl){
             this.lvl = lvl;
             return this;
         }
-
 
         public Builder aps(double aps){
             this.aps = aps;
@@ -112,7 +118,7 @@ public class Item {
 
     }
 
-    private Item(String name, String rarity, int ilvl, String data, String implicit, List<String> mods, String flavorText, String itemClass, String sockets, int quality, int lvl, Damage phys, Damage fire, Damage cold, Damage lighting, Damage chaos, double aps, int physInc) {
+    private Item(String name, String rarity, int ilvl, String data, String implicit, List<String> mods, String flavorText, String itemClass, String sockets, int quality, int lvl, int links, Damage phys, Damage fire, Damage cold, Damage lighting, Damage chaos, double aps, int physInc) {
         this.name = name;
         this.rarity = rarity;
         this.ilvl = ilvl;
@@ -124,6 +130,7 @@ public class Item {
         this.sockets = sockets;
         this.quality = quality;
         this.lvl = lvl;
+        this.links = links;
         this.phys = phys;
         this.fire = fire;
         this.cold = cold;

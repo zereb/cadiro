@@ -37,6 +37,18 @@ public class ItemParser {
             if (line.contains("Item Class:"))
                 itemClass = trim;
 
+            if (line.contains("Sockets:")){
+                line = trim.replaceAll("[RGBW]", "");
+                int max = 1, current = 1;
+                for (char c : line.toCharArray()) {
+                    if (c == '-') current++;
+                    else  current = 0;
+                    if (current > max) max = current;
+                }
+                builder.links(max);
+            }
+
+
 
             if (line.contains("Level:") && !lvlFlag){
                 builder.lvl(Integer.parseInt(line.replaceAll("\\D", "")));
@@ -46,7 +58,7 @@ public class ItemParser {
             if (line.contains("Sockets:"))
                 builder.sockets(trim);
 
-            if (line.contains("Quality") && !qualityFlag) {
+            if (line.contains("Quality") && !qualityFlag && !line.contains("Additional Effects From Quality:")) {
                 builder.quality(Integer.parseInt(line.replaceAll("\\D", "")));
                 qualityFlag = true;
             }

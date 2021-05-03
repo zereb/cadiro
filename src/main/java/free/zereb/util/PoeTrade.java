@@ -34,12 +34,13 @@ public class PoeTrade {
                 .build();
 
         String reqTemplate;
-        if (item.rarity.equals("Unique"))
+        if (item.rarity.equals("Unique") && item.links < 5)
             reqTemplate = "{\"query\":{\"status\":{\"option\":\"online\"},\"name\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[],\"disabled\":true}],\"filters\":{\"trade_filters\":{\"disabled\":false,\"filters\":{\"sale_type\":{\"option\":\"priced\"}}}}},\"sort\":{\"price\":\"asc\"}}";
+        else if (item.rarity.equals("Unique"))
+            reqTemplate = "{\"query\":{\"status\":{\"option\":\"online\"},\"name\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[]}],\"filters\":{\"socket_filters\":{\"disabled\":false,\"filters\":{\"links\":{\"min\":" + item.links + "}}}}},\"sort\":{\"price\":\"asc\"}}";
 
         else if(item.rarity.equals("Gem"))
             reqTemplate = "{\"query\":{\"status\":{\"option\":\"online\"},\"type\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[],\"disabled\":true}],\"filters\":{\"misc_filters\":{\"disabled\":false,\"filters\":{\"quality\":{\"min\":" + item.quality + "},\"gem_level\":{\"min\":" + item.lvl + "}}}}},\"sort\":{\"price\":\"asc\"}}";
-
         else
             reqTemplate = "{\"query\":{\"status\":{\"option\":\"online\"},\"type\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[]}],\"filters\":{\"trade_filters\":{\"disabled\":true,\"filters\":{\"price\":{\"min\":29}}},\"type_filters\":{\"filters\":{\"rarity\":{\"option\":\"rare\"}},\"disabled\":true}}},\"sort\":{\"price\":\"asc\"}}";
 
