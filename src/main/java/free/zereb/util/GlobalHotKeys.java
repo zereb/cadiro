@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.HashMap;
@@ -46,6 +47,18 @@ public class GlobalHotKeys implements NativeKeyListener, NativeMouseWheelListene
 
         sendToChat("F4", "/hideout");
         sendToChat("F2", "/remaining");
+
+        //15 left mouse autoclicks on Ctrl + Shift + X
+        Runnable cliks = () -> {
+            for (int i = 0; i < 15; i++) {
+                robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+                robot.delay(50);
+                robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+                robot.delay(50);
+            }
+        };
+
+        keyCombinations.putIfAbsent("ShiftCtrlX", () -> new Thread(cliks).start());
 
 
 

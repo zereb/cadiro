@@ -45,6 +45,8 @@ public class PoeTrade {
             reqTemplate = "{\"query\":{\"status\":{\"option\":\"online\"},\"type\":\"" + item.name + "\",\"stats\":[{\"type\":\"and\",\"filters\":[]}],\"filters\":{\"trade_filters\":{\"disabled\":true,\"filters\":{\"price\":{\"min\":29}}},\"type_filters\":{\"filters\":{\"rarity\":{\"option\":\"rare\"}},\"disabled\":true}}},\"sort\":{\"price\":\"asc\"}}";
 
         System.out.println(reqTemplate);
+
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .header("Content-Type", "application/json")
@@ -159,4 +161,5 @@ public class PoeTrade {
             }
         }
     }
+
 }
